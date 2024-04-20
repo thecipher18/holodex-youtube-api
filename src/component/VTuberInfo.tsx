@@ -33,7 +33,7 @@ const VTuberInfo = (props: VTuberInfoProps) => {
   }
 
   return (
-    <div>
+    <div className='info'>
       {
         jsonData.map((data) => {
           return (
