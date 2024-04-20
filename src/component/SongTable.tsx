@@ -34,20 +34,19 @@ function SongTable(props: SongTableProps) {
     ];
 
     return (
-        <div>
+            <tbody>
             {jsonData.map((data) => {
                 return (
-                        <tbody>
-
+                       
                             <tr key={data.nameVideo}>
                                 <td className="border: 1px solid"><img src={data.thumbnail}></img></td>
                                 <td className="border: 1px solid">{data.nameVideo}</td>
                                 <td className="border: 1px solid">{data.views}</td>
                             </tr>
-                        </tbody>
+                       
                 );
             })}
-        </div>
+            </tbody>
     );
 }
 
