@@ -17,19 +17,19 @@ function SongTable(props: SongTableProps) {
 
     const jsonData = [
         {
-            "nameVideo": "１周年記念】ダダダダ天使／湊あくあ【歌ってみた】",
+            "nameVideo": "【１周年記念】ダダダダ天使／湊あくあ【歌ってみた】",
             "views": 20000000,
             "thumbnail": "https://i.ytimg.com/vi/DmURJdzr-Cc/default.jpg"
         },
         {
-            "nameVideo": "Video2",
+            "nameVideo": "【original】海想列車／湊あくあ【アニメーションMV】",
             "views": 20000000,
-            "thumbnail": "https://i.ytimg.com/vi/DmURJdzr-Cc/default.jpg"
+            "thumbnail": "https://i.ytimg.com/vi/tuWw5EQPGlc/default.jpg"
         },
         {
-            "nameVideo": "Video3",
+            "nameVideo": "【最終回】ぼっち・ざ・ろっく！同時視聴／BOCCHI THE ROCK!【湊あくあ/ホロライブ】",
             "views": 20000000,
-            "thumbnail": "https://i.ytimg.com/vi/DmURJdzr-Cc/default.jpg"
+            "thumbnail": "https://i.ytimg.com/vi/8mfs-004OAs/default.jpg"
         },
     ];
 
