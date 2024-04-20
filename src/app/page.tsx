@@ -1,5 +1,4 @@
 import Image from "next/image";
-import VTuberInfo from "@/component/VTuberInfo";
 import SongTable from "@/component/SongTable";
 
 export default function Home() {
