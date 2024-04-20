@@ -34,6 +34,15 @@ function SongTable(props: SongTableProps) {
     ];
 
     return (
+        <div className="pl-20">
+        <table className="border-black border-2">
+          <thead className="border-black border-2">
+              <tr>
+                  <td className="border-black border-2">Thumbnail</td>
+                  <td className="border-black border-2">Title</td>
+                  <td className="border-black border-2">Views</td>
+              </tr>
+          </thead>
             <tbody>
             {jsonData.map((data) => {
                 return (
@@ -47,6 +56,9 @@ function SongTable(props: SongTableProps) {
                 );
             })}
             </tbody>
+
+            </table>
+      </div>
     );
 }
 
