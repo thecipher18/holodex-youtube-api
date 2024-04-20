@@ -39,9 +39,9 @@ function SongTable(props: SongTableProps) {
                 return (
                        
                             <tr key={data.nameVideo}>
-                                <td className="border: 1px solid"><img src={data.thumbnail}></img></td>
-                                <td className="border: 1px solid">{data.nameVideo}</td>
-                                <td className="border: 1px solid">{data.views}</td>
+                                <td className="border-black border-2"><img src={data.thumbnail}></img></td>
+                                <td className="border-black border-2">{data.nameVideo}</td>
+                                <td className="border-black border-2">{data.views}</td>
                             </tr>
                        
                 );
