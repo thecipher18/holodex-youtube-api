@@ -1,5 +1,8 @@
 "use client";
 
+import useFetchHolo from '@/app/hook/useFetchHolo';
+import useFetchVideoView from '@/app/hook/useFetchVideoView';
+import useFetchYoutube from '@/app/hook/useFetchYoutube';
 import { ValueOf } from 'next/dist/shared/lib/constants';
 import React, { useState } from 'react'
 
@@ -13,7 +16,12 @@ import React, { useState } from 'react'
 function SongTable() {
     //const { nameVideo, views, thumbnail } = props;
 
-    const [number, setNumber] = useState<number>(0);
+    // const { videoStatistics } = useFetchData();
+    
+
+    const { youtubeViews, data } = useFetchVideoView();
+
+    console.log(youtubeViews)
 
     const jsonData = [
         {

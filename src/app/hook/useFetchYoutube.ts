@@ -3,7 +3,8 @@ import useSWR from 'swr'
 
 type useFetchYoutubeProps = {
   youtubeURL: string
-  parameters?: {}
+  parameters?: {},
+  videoId: string[]
 }
 
 const fetchYoutube = async (url: string) => {
@@ -21,17 +22,21 @@ const fetchYoutube = async (url: string) => {
 
 }
 
-const getParameterQuery = (url: string, parameters: any) => {
-  if (!parameters) return url;
+const getParameterQuery = (url: string, videoId: string[], parameters: any) => {
+  
+  // if (!parameters) return url;
   const keys = Object.keys(parameters);
   const keyValuePairs = keys.map(key => {
     return encodeURIComponent(key) + '=' + encodeURIComponent(parameters[key]);
   }); 
-  return url + "?" + keyValuePairs.join('&');
+  const parameteredURL = url + "?" + keyValuePairs.join('&');
+  const videoIdString = videoId.join("&id=");
+  return parameteredURL + "&id=" + videoIdString;
 }
 const useFetchYoutube = (props: useFetchYoutubeProps) => {
-  const { youtubeURL, parameters } = props;
-  const url = getParameterQuery(youtubeURL, parameters)
+  const { youtubeURL, parameters, videoId } = props;
+  console.log(videoId)
+  const url = getParameterQuery(youtubeURL, videoId, parameters)
   const { data, error, isLoading } = useSWR(url, fetchYoutube)
 
   return {

@@ -6,8 +6,6 @@ type useFetchHoloProps = {
   parameters?: {}
 }
 
-
-
 const fetchHolo = async (url: string) => {
   const myHeaders = new Headers();
   myHeaders.append("X-APIKEY", process.env.NEXT_PUBLIC_HOLODEX_API_KEY as string);
