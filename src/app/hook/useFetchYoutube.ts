@@ -30,14 +30,13 @@ const getParameterQuery = (url: string, videoId: string[], parameters: any) => {
     return encodeURIComponent(key) + '=' + encodeURIComponent(parameters[key]);
   }); 
   const parameteredURL = url + "?" + keyValuePairs.join('&');
-  const videoIdString = videoId.join("&id=");
+  const videoIdString = videoId?.join("&id=");
   return parameteredURL + "&id=" + videoIdString;
 }
 const useFetchYoutube = (props: useFetchYoutubeProps) => {
   const { youtubeURL, parameters, videoId } = props;
-  console.log(videoId)
   const url = getParameterQuery(youtubeURL, videoId, parameters)
-  const { data, error, isLoading } = useSWR(url, fetchYoutube)
+  const { data, error, isLoading } = useSWR(videoId ? url : null, fetchYoutube)
 
   return {
     data,
