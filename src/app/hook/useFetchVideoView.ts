@@ -9,15 +9,17 @@ const youtubeURL = "https://www.googleapis.com/youtube/v3/videos";
 const useFetchVideoView = () => {
   const {data, error, isLoading} = useFetchHolo({holodexURL: holodexURL, 
     parameters: {
-      topic: "minecraft"
+      org: "Hololive",
+      limit: 50,
+      status: "past"
     }
   });
 
   const videoId = data?.map((item: any) => item.id);
 
-  const {data: youtubeViews, error: e, isLoading: is} = useFetchYoutube({youtubeURL: youtubeURL, 
+  const {data: youtubeViews, error: e, isLoading: isFetching} = useFetchYoutube({youtubeURL: youtubeURL, 
     parameters: {
-      part: "statistics,snippet",
+      part: "statistics,snippet,id",
       key: process.env.NEXT_PUBLIC_YOUTUBE_API_KEY,
     },
     videoId: videoId
@@ -27,7 +29,8 @@ const useFetchVideoView = () => {
     data,
     error,
     isLoading,
-    youtubeViews,
+    videos: youtubeViews?.items,
+    isFetching
   }
 
 }

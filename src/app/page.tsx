@@ -1,6 +1,4 @@
-"use client";
-
-import SongTable from "@/component/SongTable";
+import SongTable from "@/components/SongTable";
 
 export default function Home() {
 
