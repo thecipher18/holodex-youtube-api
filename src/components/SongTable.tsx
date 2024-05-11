@@ -35,17 +35,42 @@ function SongTable() {
                 {sortedVideos?.map((data: any, index: number) => {
                     const thumbnail = data.snippet.thumbnails.default;
                     const statistics = data.statistics;
-                    const snippet = data.snippet;
+                    const snippet = data.snippet; 
+                    let nameListString = "";
+                    for (let index = 0; index < data.mentions.length; index++) {
+                        if (index == data.mentions.length-1) {
+                            nameListString += data.mentions[index];
+                        } else {
+                            nameListString += data.mentions[index] + "<br/>";
+                        } 
+                    }
+
+
+
                     return (
                         <tr key={index}>
                             <td className='song'>{index+1}</td>
                             <td className='song'>
-                                <Image src={thumbnail.url} alt='clipThumbnail' width={thumbnail.width} height={thumbnail.height}/>
+                                <a target="_blank" rel="noopener noreferrer" href={`https://youtube.com/watch?v=${data.id}`}>
+                                    <Image src={thumbnail.url} alt='clipThumbnail' width={thumbnail.width} height={thumbnail.height}/>
+                                </a>
                             </td>
-                            <td className='song'>{snippet?.title}</td>
+                            <td className='song'>
+                                <a target="_blank" rel="noopener noreferrer" href={`https://youtube.com/watch?v=${data.id}`}>
+                                    {snippet?.title}
+                                </a>
+                            </td>
                             <td className='song'>
                                 {/* <Image src={data.memberThumbnail} alt='memberThumbnail' width={100} height={75}/> */}
-                                {snippet.channelTitle}
+                                {
+                                   data.mentions?.map((item:string) => {
+                                    return (
+                                        <li>
+                                            {item}
+                                        </li>
+                                    )
+                                   })
+                                }
                             </td>
                             <td className='song'>{statistics.viewCount}</td>
                         </tr>

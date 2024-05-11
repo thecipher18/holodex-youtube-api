@@ -11,11 +11,33 @@ const useFetchVideoView = () => {
     parameters: {
       org: "Hololive",
       limit: 50,
-      status: "past"
+      status: "past",
+      topic: "Music_Cover",
+      include: "mentions"
     }
   });
 
   const videoId = data?.map((item: any) => item.id);
+
+  const assignVideoData = (videoList: any) => {
+    let videoObject = {};
+    data?.forEach((item: any) => {
+      if (item.mentions)
+    {
+      let nameList = [];
+      for (let i = 0; i < item.mentions.length; i++ ) {
+        nameList.push(item.mentions[i].english_name)
+      }
+      videoObject[item.id] = nameList;
+    } else {
+      videoObject[item.id] = [item.channel.english_name];
+    }
+    });
+    return videoList?.map((item:any) => {
+      return {...item, mentions:videoObject[item.id]}
+    });
+   }
+  
 
   const {data: youtubeViews, error: e, isLoading: isFetching} = useFetchYoutube({youtubeURL: youtubeURL, 
     parameters: {
@@ -25,11 +47,13 @@ const useFetchVideoView = () => {
     videoId: videoId
   });
 
+  console.log(assignVideoData(youtubeViews?.items));
+
   return {
     data,
     error,
     isLoading,
-    videos: youtubeViews?.items,
+    videos: assignVideoData(youtubeViews?.items),
     isFetching
   }
 
