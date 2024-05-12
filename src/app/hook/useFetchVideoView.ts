@@ -19,19 +19,60 @@ const useFetchVideoView = () => {
 
   const videoId = data?.map((item: any) => item.id);
 
+  const checkIfOfficialChannel = (channelId: string) => { //Check if this is one of the six official group channels
+    if (channelId == "UCJFZiqLMntJufDCHc6bQixg" 
+    || channelId == "UCfrWoRGlawPQDQxxeIDRP0Q" 
+    || channelId == "UCotXwY6s8pWmuWd_snKYjhg"
+    || channelId == "UC10wVt6hoQiwySRhz7RdOUA"
+    || channelId == "UCWsfcksUUpoEvhia0_ut0bA"
+    || channelId == "UCJxZpzx4wHzEYD-eCiZPikg"
+    ) { //HoloMain, HoloIdMain, HoloENMain, DevisMain, StarJPMain, StarENMain) 
+      return true;
+    } else {
+      return false;
+    }
+
+  } 
+
   const assignVideoData = (videoList: any) => {
     let videoObject = {};
     data?.forEach((item: any) => {
-      if (item.mentions)
-    {
       let nameList = [];
-      for (let i = 0; i < item.mentions.length; i++ ) {
-        nameList.push(item.mentions[i].english_name)
+      if (checkIfOfficialChannel(item.channel.id)) { //If it is the official channel: ignore channel, only uses mentions
+          console.log("This an official channel: " + item.channel.name) //Check 
+          if (item.mentions) {
+            console.log("Yes main Peko!" + item.title)
+              for (let i = 0; i < item.mentions.length; i++ ) {
+                if (!checkIfOfficialChannel(item.mentions.id)) { //If an official channel is in mention, ignore
+                  nameList.push(item.mentions[i].english_name)
+                } 
+              }
+              videoObject[item.id] = nameList; 
+            } else {
+              console.log("Yes main Nano!" + item.title)
+              videoObject[item.id] = [item.channel.name];
+            }
+          
+      } else {
+          if (item.mentions) {
+            nameList.push(item.channel.english_name)
+            console.log("No main Peko!:" + item.title)
+            for (let i = 0; i < item.mentions.length; i++ ) {
+              if (!checkIfOfficialChannel(item.mentions[i].id)) { //If an official channel is in mention, ignore
+                
+                nameList.push(item.mentions[i].english_name)
+              } 
+            }
+
+            videoObject[item.id] = nameList; 
+
+            } else {
+              console.log("No main Nano!" + item.title)
+            videoObject[item.id] = [item.channel.english_name];
+
+            }
+          
       }
-      videoObject[item.id] = nameList;
-    } else {
-      videoObject[item.id] = [item.channel.english_name];
-    }
     });
     return videoList?.map((item:any) => {
       return {...item, mentions:videoObject[item.id]}
