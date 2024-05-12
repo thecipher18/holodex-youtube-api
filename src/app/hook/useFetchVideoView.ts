@@ -41,7 +41,7 @@ const useFetchVideoView = () => {
       if (checkIfOfficialChannel(item.channel.id)) { //If it is the official channel: ignore channel, only uses mentions
           console.log("This an official channel: " + item.channel.name) //Check 
           if (item.mentions) {
-            console.log("Yes main Peko!" + item.title)
+            
               for (let i = 0; i < item.mentions.length; i++ ) {
                 if (!checkIfOfficialChannel(item.mentions.id)) { //If an official channel is in mention, ignore
                   nameList.push(item.mentions[i].english_name)
@@ -49,14 +49,14 @@ const useFetchVideoView = () => {
               }
               videoObject[item.id] = nameList; 
             } else {
-              console.log("Yes main Nano!" + item.title)
+              
               videoObject[item.id] = [item.channel.name];
             }
           
       } else {
           if (item.mentions) {
             nameList.push(item.channel.english_name)
-            console.log("No main Peko!:" + item.title)
+            
             for (let i = 0; i < item.mentions.length; i++ ) {
               if (!checkIfOfficialChannel(item.mentions[i].id)) { //If an official channel is in mention, ignore
                 
@@ -67,7 +67,7 @@ const useFetchVideoView = () => {
             videoObject[item.id] = nameList; 
 
             } else {
-              console.log("No main Nano!" + item.title)
+              
             videoObject[item.id] = [item.channel.english_name];
 
             }
