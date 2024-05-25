@@ -19,31 +19,19 @@ const useFetchVideoView = () => {
 
   const videoId = data?.map((item: any) => item.id);
 
-  const checkIfOfficialChannel = (channelId: string) => { //Check if this is one of the six official group channels
-    if (channelId == "UCJFZiqLMntJufDCHc6bQixg" 
-    || channelId == "UCfrWoRGlawPQDQxxeIDRP0Q" 
-    || channelId == "UCotXwY6s8pWmuWd_snKYjhg"
-    || channelId == "UC10wVt6hoQiwySRhz7RdOUA"
-    || channelId == "UCWsfcksUUpoEvhia0_ut0bA"
-    || channelId == "UCJxZpzx4wHzEYD-eCiZPikg"
-    ) { //HoloMain, HoloIdMain, HoloENMain, DevisMain, StarJPMain, StarENMain) 
-      return true;
-    } else {
-      return false;
-    }
-
-  } 
+  let strOfficialChannelList = ["UCJFZiqLMntJufDCHc6bQixg", "UCfrWoRGlawPQDQxxeIDRP0Q", "UCotXwY6s8pWmuWd_snKYjhg", //HoloMain, HoloIdMain, HoloENMain, DevisMain, StarJPMain, StarENMain) 
+                                  "UC10wVt6hoQiwySRhz7RdOUA", "UCWsfcksUUpoEvhia0_ut0bA", "UCJxZpzx4wHzEYD-eCiZPikg"]//Check if this is one of the six official group channels
 
   const assignVideoData = (videoList: any) => {
     let videoObject = {};
     data?.forEach((item: any) => {
       let nameList = [];
-      if (checkIfOfficialChannel(item.channel.id)) { //If it is the official channel: ignore channel, only uses mentions
+      if (strOfficialChannelList.includes(item.channel.id)) { //If it is the official channel: ignore channel, only uses mentions
           console.log("This an official channel: " + item.channel.name) //Check 
           if (item.mentions) {
-            
+              console.log(item.mentions)
               for (let i = 0; i < item.mentions.length; i++ ) {
-                if (!checkIfOfficialChannel(item.mentions.id)) { //If an official channel is in mention, ignore
+                if (!strOfficialChannelList.includes(item.mentions[i].id)) { //If an official channel is in mention, ignore
                   nameList.push(item.mentions[i].english_name)
                 } 
               }
@@ -58,7 +46,7 @@ const useFetchVideoView = () => {
             nameList.push(item.channel.english_name)
             
             for (let i = 0; i < item.mentions.length; i++ ) {
-              if (!checkIfOfficialChannel(item.mentions[i].id)) { //If an official channel is in mention, ignore
+              if (!strOfficialChannelList.includes(item.mentions[i].id)) { //If an official channel is in mention, ignore
                 
                 nameList.push(item.mentions[i].english_name)
               } 
